@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'Flights.apps.FlightsConfig',        # to config the Flights app  --> Flights --> apps.py --> FlightsConfig
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
