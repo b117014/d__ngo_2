@@ -24,3 +24,6 @@
     - work with shell .
 
 <img src="./Images/shell.png" >
+
+7. python3 manage.py createsuperuser
+    - this commands helps to create admin of the app to manage the database
