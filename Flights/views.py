@@ -21,3 +21,8 @@ def flight(request,flight_id):
       "passenger":flight.passenger.all()
     }
     return render(request,'flight/flight.html',context)
+
+def book(request,flight_id):
+
+    passenger_id = request.POST["passenger"]
+    return passenger_id
