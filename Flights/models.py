@@ -20,3 +20,11 @@ class Flights(models.Model):
     # whenevr call to fetching the data or String Representation
     def __str__(self):
         return f" {self.origin} to {self.destination} takes {self.duration}"
+
+class Passengers(models.Model):
+    first = models.CharField(max_length=64)
+    last = models.CharField(max_length=64)
+    flight = models.ManyToManyField(Flights, blank = True, related_name="passenger")
+
+    def __str__(self):
+        return f"{self.first} {self.last}"

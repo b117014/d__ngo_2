@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import Http404
 from django.shortcuts import render
 from .models import Flights
 # Create your views here.
@@ -10,3 +10,13 @@ def index(request):
     }                                 # pass the request argument in main function
     # context is fixed name dictonary where we can pass to the html page
     return render(request,"flight/index.html",context)
+
+def flight(request,flight_id):
+    try:
+        flight = Flights.objects.get(pk = flight_id)
+    except Flights.DoesNotExist:
+        raise Http404("Flight does not exist")
+    context = {
+      "flight":flight
+    }
+    return render(request,'flight/flight.html',context)
