@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.http import Http404,HttpResponseRedirect
+from django.contrib.auth import authenticate,login,logout
+from django.http import Http404,HttpResponseRedirect,HttpResponse
 from django.shortcuts import render
 from .models import Flights,Passengers
 from django.urls import reverse
@@ -11,6 +11,16 @@ def index(request):
     }                                 # pass the request argument in main function
     # context is fixed name dictonary where we can pass to the html page
     return render(request,"flight/index.html",context)
+
+
+# login
+def userAuth(request):
+
+    if not request.user.is_authenticate:   #request.user.is_authenticate that is built in django and also request.user
+        return HttpResponse("You have not logged in")
+    constex = {
+    "user":request.user
+    }
 
 def flight(request,flight_id):
     try:
