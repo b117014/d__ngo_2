@@ -18,9 +18,22 @@ def userAuth(request):
 
     if not request.user.is_authenticate:   #request.user.is_authenticate that is built in django and also request.user
         return HttpResponse("You have not logged in")
-    constex = {
+    context = {
     "user":request.user
     }
+    return render(request,'flight/user.html',context)
+
+#login form
+
+def login_view(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(request,username=username,password=password)
+    if user is not None:
+        login(request,user)
+        return HttpResponseRedirect(reverse('index'))
+    return HttpResponse("Login First")
+    
 
 def flight(request,flight_id):
     try:
