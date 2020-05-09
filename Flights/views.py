@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.models import User
 from django.http import Http404,HttpResponseRedirect,HttpResponse
 from django.shortcuts import render
 from .models import Flights,Passengers
@@ -12,7 +13,14 @@ def index(request):
     # context is fixed name dictonary where we can pass to the html page
     return render(request,"flight/index.html",context)
 
+#Register
 
+def register_view(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    email = request.POST['email']
+    user = User.objects.create_user(username=username,password=password,email=email)    # to create user and User is inbuit function
+    user.save()
 # login
 def userAuth(request):
 
@@ -33,7 +41,14 @@ def login_view(request):
         login(request,user)
         return HttpResponseRedirect(reverse('index'))
     return HttpResponse("Login First")
-    
+
+
+#logout
+
+def logout_view(request):
+    logout(request)
+    return HttpResponse("Logout ...")
+
 
 def flight(request,flight_id):
     try:
